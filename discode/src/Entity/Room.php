@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,15 @@ class Room
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Message", inversedBy="room_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="room_id", orphanRemoval=true)
      */
     private $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -43,15 +51,35 @@ class Room
         return $this;
     }
 
-    public function getMessages(): ?Message
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
     {
         return $this->messages;
     }
 
-    public function setMessages(?Message $messages): self
+    public function addMessage(Message $message): self
     {
-        $this->messages = $messages;
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setRoomId($this);
+        }
 
         return $this;
     }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getRoomId() === $this) {
+                $message->setRoomId(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

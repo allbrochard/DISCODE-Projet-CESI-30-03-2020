@@ -34,9 +34,11 @@ class Message
     private $epingler;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Room", mappedBy="messages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $room_id;
+
 
     public function __construct()
     {
@@ -84,34 +86,16 @@ class Message
         return $this;
     }
 
-    /**
-     * @return Collection|Room[]
-     */
-    public function getRoomId(): Collection
+    public function getRoomId(): ?Room
     {
         return $this->room_id;
     }
 
-    public function addRoomId(Room $roomId): self
+    public function setRoomId(?Room $room_id): self
     {
-        if (!$this->room_id->contains($roomId)) {
-            $this->room_id[] = $roomId;
-            $roomId->setMessages($this);
-        }
+        $this->room_id = $room_id;
 
         return $this;
     }
 
-    public function removeRoomId(Room $roomId): self
-    {
-        if ($this->room_id->contains($roomId)) {
-            $this->room_id->removeElement($roomId);
-            // set the owning side to null (unless already changed)
-            if ($roomId->getMessages() === $this) {
-                $roomId->setMessages(null);
-            }
-        }
-
-        return $this;
-    }
 }
