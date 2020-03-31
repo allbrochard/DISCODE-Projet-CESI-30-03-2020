@@ -37,12 +37,12 @@ class Message
      * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $room_id;
+    private $room;
 
 
     public function __construct()
     {
-        $this->room_id = new ArrayCollection();
+        $this->room = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,12 +88,12 @@ class Message
 
     public function getRoomId(): ?Room
     {
-        return $this->room_id;
+        return $this->room;
     }
 
-    public function setRoomId(?Room $room_id): self
+    public function setRoomId(?Room $room): self
     {
-        $this->room_id = $room_id;
+        $this->room = $room;
 
         return $this;
     }
