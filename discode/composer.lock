@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8f9e9e6997f9c08a717b9a36f1cf1b4",
+    "content-hash": "30870b5696fa56cf14a54730a1b200c4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4393,16 +4393,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v4.4.6",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "3f6e6903960e488dd20b884f13a2ad1b8dff0ac6"
+                "reference": "c9a867d69dd77be33ff0c008a43aa6dc90ec91a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/3f6e6903960e488dd20b884f13a2ad1b8dff0ac6",
-                "reference": "3f6e6903960e488dd20b884f13a2ad1b8dff0ac6",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/c9a867d69dd77be33ff0c008a43aa6dc90ec91a5",
+                "reference": "c9a867d69dd77be33ff0c008a43aa6dc90ec91a5",
                 "shasum": ""
             },
             "require": {
@@ -4414,7 +4414,7 @@
                 "symfony/security-core": "^4.4",
                 "symfony/security-csrf": "^4.2|^5.0",
                 "symfony/security-guard": "^4.2|^5.0",
-                "symfony/security-http": "^4.4.5"
+                "symfony/security-http": "^4.4"
             },
             "conflict": {
                 "symfony/browser-kit": "<4.2",
@@ -4472,7 +4472,7 @@
             ],
             "description": "Symfony SecurityBundle",
             "homepage": "https://symfony.com",
-            "time": "2020-03-17T19:48:51+00:00"
+            "time": "2019-11-14T22:51:34+00:00"
         },
         {
             "name": "symfony/security-core",
