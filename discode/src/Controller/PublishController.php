@@ -2,18 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\Publisher;
+use Symfony\Component\Mercure\Update;
 
-class PublishController extends AbstractController
+class PublishController
 {
-    /**
-     * @Route("/publish", name="publish")
-     */
-    public function index()
+    public function __invoke(Publisher $publisher): Response
     {
-        return $this->render('publish/index.html.twig', [
-            'controller_name' => 'PublishController',
-        ]);
+        $update = new Update(
+            'http://example.com/books/1',
+            json_encode(['status' => 'OutOfStock'])
+        );
+
+        // The Publisher service is an invokable object
+        $publisher($update);
+
+        return new Response('published!');
     }
 }
+
