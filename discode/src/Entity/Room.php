@@ -16,13 +16,13 @@ class Room
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("public')
+     * @Groups("public")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("public')
+     * @Groups("public")
      */
     private $nom;
 
