@@ -23,6 +23,6 @@ class PublishController extends AbstractController
             $target
         );
         $publisher($update);
-        return $this->redirectToRoute('room_show');
+        return $this->redirectToRoute('room_show', array('room'=> $room));
     }
 }
