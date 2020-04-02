@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
+use App\Service\MercureCookieGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,11 +52,14 @@ class RoomController extends AbstractController
     /**
      * @Route("/{id}", name="room_show", methods={"GET"})
      */
-    public function show(Room $room): Response
+    public function show(Room $room, MercureCookieGenerator $cookieGenerator): Response
     {
-        return $this->render('room/show.html.twig', [
+
+        $response = $this->render('room/show.html.twig', [
             'room' => $room,
         ]);
+        $response->headers->set('set-cookie', $cookieGenerator->generate($room));
+        return $response;
     }
 
     /**

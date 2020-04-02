@@ -2,23 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Room;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mercure\Publisher;
 use Symfony\Component\Mercure\Update;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
-class PublishController
+class PublishController extends AbstractController
 {
-    public function __invoke(Publisher $publisher): Response
+    /**
+     * @Route("/send/{room}", name="send", methods={"POST"})
+     */
+    public function send(Publisher $publisher, Room $room, SerializerInterface $serializer)
     {
+        $target = ["http://192.168.1.22/room/{$room->getId()}"];
         $update = new Update(
-            'http://example.com/books/1',
-            json_encode(['status' => 'OutOfStock'])
+            "http://192.168.1.22/ping",
+            $serializer->serialize($room, 'json', ['groups' => 'public']),
+            $target
         );
-
-        // The Publisher service is an invokable object
         $publisher($update);
-
-        return new Response('published!');
+        return $this->redirectToRoute('room_show');
     }
 }
-

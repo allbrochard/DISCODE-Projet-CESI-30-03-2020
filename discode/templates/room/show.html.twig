@@ -17,10 +17,34 @@
             </tr>
         </tbody>
     </table>
-
+    <div>
+        <ul class="messages">
+        </ul>
+        <form action="{{ path('send', {room : room.id}) }}" method="post">
+            <input name="sendMessage" type="text" value="" placeholder="Envoyer un message">
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
     <a href="{{ path('room_index') }}">back to list</a>
 
     <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
 
     {{ include('room/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        const url = new URL('https://192.168.1.22:3000/hub');
+        //url.searchParams.append('topic', 'https://example.com/books/{id}');
+        url.searchParams.append('topic', 'https://192.168.1.22/room/${room.id}');
+        const eventSource = new EventSource(url, {withCredentials:true});
+        eventSource.onmessage = e => {
+            const data = JSON.parse(e.data);
+            let message = data.message;
+            if(data.message){
+                document.querySelector(".messages").insertAdjacentHTML('afterbegin', '<li class="message">${message}</li>')
+            }
+        };
+
+    </script>
 {% endblock %}

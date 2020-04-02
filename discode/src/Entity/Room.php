@@ -15,11 +15,13 @@ class Room
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("public')
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("public')
      */
     private $nom;
 
@@ -30,6 +32,7 @@ class Room
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="rooms")
+     * @Groups("public')
      */
     private $users;
 
