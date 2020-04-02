@@ -33,7 +33,6 @@ class Room
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="rooms")
-     * @Groups("public')
      */
     private $users;
 
