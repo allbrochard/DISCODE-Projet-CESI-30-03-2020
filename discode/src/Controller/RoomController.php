@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Component\Mercure\Update;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -68,7 +69,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/send/{room}", name="send", methods={"POST"})
      */
-    public function send(PublisherInterface  $publisher, $room, SerializerInterface $serializer)
+    public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer)
     {
         //$request = $this->get('request');
         $target = ["http://192.168.1.22/room/".$room];
@@ -81,7 +82,7 @@ class RoomController extends AbstractController
             $serializer->serialize($jsonEncode, 'json'),
             $target
         );
-        $publisher($update);
+        $bus->dispatch($update);
         return $this->redirectToRoute('room_show', array('id'=> $room));
     }
     /**
