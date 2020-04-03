@@ -1,0 +1,3 @@
+Il ne faut pas oublier de changer l'adresse ip du serveur distant ainsi que le port ssh. 
+Les scripts doivent être dans /etc/scripts sinon il faut changer l'adresse.
+Ne pas oublier de changer l'utilisateur.
