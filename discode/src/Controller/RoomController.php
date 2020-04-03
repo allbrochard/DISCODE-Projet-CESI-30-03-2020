@@ -89,7 +89,7 @@ class RoomController extends AbstractController
         $jsonEncode = array(
             'room'=> $room,
             'message' => $_POST['sendMessage'],
-            'user' =>  $this->getUser()
+            'user' =>  $this->getUser()->getUsername()
         );
         $userLogged = $this->getUser();
         $criteria = array();
