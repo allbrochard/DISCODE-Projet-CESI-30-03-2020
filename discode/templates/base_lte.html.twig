@@ -36,7 +36,7 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-	<h4>#Salon de pepito</h4>
+	<h4>#{% block nomSalon %}{% endblock %}</h4>
   </nav>
   <!-- /.navbar -->
 
@@ -68,12 +68,12 @@
                with font-awesome or any other icon font library -->
           <li class="nav-header">Liste des salons</li>
           {% block rooms %}
-          <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.0" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
-              <p># Salon</p>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a href="https://adminlte.io/docs/3.0" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                <p># Salon</p>
+              </a>
+            </li>
           {% endblock %}
         </ul>
       </nav>
@@ -92,80 +92,11 @@
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-12">
-
-
-
-
-
-
-            <!-- DIRECT CHAT -->
-            <div class=" direct-chat direct-chat-primary" >
-              <!-- /.card-header -->
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages">
-                  <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">Logged User</span>
-                      <span class="direct-chat-timestamp float-right">Message date</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Placeholder user message
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-                  <!-- Message to the right -->
-                  <div class="direct-chat-msg right">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-right">Other User</span>
-                      <span class="direct-chat-timestamp float-left">Message date</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Placeholder user message
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
-                  <!-- /.direct-chat-msg -->
-
-
-                </div>
-				
-				
-                <!-- /.direct-chat-pane -->
-              <div class="card-footer">
-                <form action="#" method="post">
-                  <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                    <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Envoyer</button>
-                    </span>
-                  </div>
-                </form>
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!--/.direct-chat -->
-
-
-
-
-
-
+            {% block chat %}{% endblock %}
           </section>
           <!-- /.Left col -->
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
           <section class="col-lg-5 connectedSortable">
-
-
-
           </section>
           <!-- right col -->
         </div>

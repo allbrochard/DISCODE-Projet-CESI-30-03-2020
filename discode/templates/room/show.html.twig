@@ -1,37 +1,63 @@
 
 {% extends 'base_lte.html.twig' %}
 
-{% block title %}Room{% endblock %}
+{% block title %}{{ room.nom }}{% endblock %}
+{% block nomSalon %}{{ room.nom }}{% endblock %}
 
-{% block body %}
-    <h1>Room</h1>
+{% block chat %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ room.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ room.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <ul class="messages">
+    <!-- DIRECT CHAT -->
+    <div class=" direct-chat direct-chat-primary" >
+        <!-- /.card-header -->
+        <!-- Conversations are loaded here -->
+        <div class="direct-chat-messages">
             {% for message in messages|reverse %}
-                <li class="message">{{ message.user.username }}  - {{ message.message }}</li>
+                {% if message.user.username == app.user.username %}
+                    <!-- Message to the right -->
+                    <div class="direct-chat-msg right">
+                        <div class="direct-chat-infos clearfix">
+                            <span class="direct-chat-name float-right">{{ message.user.username }}</span>
+                            <span class="direct-chat-timestamp float-left">{{ message.date }}</span>
+                        </div>
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            {{ message.message }}
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                {% else %}
+                    <!-- Message. Default to the left -->
+                    <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                            <span class="direct-chat-name float-left">{{ message.user.username }} </span>
+                            <span class="direct-chat-timestamp float-right">{{ message.date }} </span>
+                        </div>
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            {{ message.message }}
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                {% endif %}
             {% endfor %}
-        </ul>
-        <form action="{{ path('send', {room : room.id}) }}" method="post">
-            <input name="sendMessage" type="text" value="" placeholder="Envoyer un message">
-            <button type="submit" class="btn btn-primary">Send</button>
-        </form>
+        </div>
+        <!-- /.direct-chat-pane -->
+        <div class="card-footer">
+            <form action="{{ path('send', {room : room.id}) }}" method="post">
+                <div class="input-group">
+                    <input type="text" name="sendMessage" placeholder="Ecrire un message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Envoyer</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <!-- /.card-footer-->
     </div>
-    <a href="{{ path('room_index') }}">back to list</a>
 
-    <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
+    <a href="{{ path('room_index') }}">back to list</a>
 
     {{ include('room/_delete_form.html.twig') }}
 {% endblock %}
