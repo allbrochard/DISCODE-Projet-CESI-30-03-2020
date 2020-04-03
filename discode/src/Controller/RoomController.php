@@ -63,10 +63,9 @@ class RoomController extends AbstractController
     public function show(Room $room, MercureCookieGenerator $cookieGenerator, MessageRepository $messageRepository): Response
     {
         $messages = $messageRepository->findBy(
-            array('room_id' => $room->getId()),
+            array('room' => $room->getId()),
             array('date_creation' => 'ASC'),
-            20,
-            null
+            20
         );
         $response = $this->render('room/show.html.twig', [
             'room' => $room,
