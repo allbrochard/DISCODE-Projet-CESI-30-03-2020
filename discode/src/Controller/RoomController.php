@@ -76,7 +76,7 @@ class RoomController extends AbstractController
         $target = [];
         $jsonEncode = array(
             'room'=> $room,
-            'message' => 'salut'
+            'message' => $_POST['sendMessage']
         );
         $update = new Update(
             "http://192.168.1.22/room/".$room,
