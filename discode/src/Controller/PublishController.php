@@ -18,7 +18,7 @@ class PublishController extends AbstractController
     {
         $target = ["http://192.168.1.22/room/{$room->getId()}"];
         $update = new Update(
-            "http://192.168.1.22/ping",
+            "http://192.168.1.22/message",
             $serializer->serialize($room, 'json', ['groups' => 'public']),
             $target
         );
