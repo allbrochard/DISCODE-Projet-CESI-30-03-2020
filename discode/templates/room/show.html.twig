@@ -37,7 +37,7 @@
 {% block javascripts %}
     <script>
 
-        const url = new URL('http://77.207.12.26:3000//hub');
+        const url = new URL('http://77.207.12.26:3000/hub');
         url.searchParams.append('topic', 'http://discode.fun/room/'+{{ room.id }});
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
