@@ -70,14 +70,13 @@
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
             if(data.message){
-                document.querySelector(".direct-chat-messages").insertAdjacentHTML('afterbegin', '<div class="direct-chat-msg right">'+
+                document.querySelector(".direct-chat-messages").insertAdjacentHTML('afterbegin', '<div class="direct-chat-msg">'+
                     '<div class="direct-chat-infos clearfix">'+
-                    '<span class="direct-chat-name float-right">'+data.user+'</span>'+
-                    '<span class="direct-chat-timestamp float-left"></span>'+
+                    '<span class="direct-chat-name float-left">'+data.user+'</span>'+
+                    '<span class="direct-chat-timestamp float-right"></span>'+
                     '</div>'+
                     '<!-- /.direct-chat-img -->'+
-                    '<div class="direct-chat-text">'+
-                    +   data.message +
+                    '<div class="direct-chat-text">'+ data.message +
                     '</div>'+
                     '<!-- /.direct-chat-text -->'+
                     '</div>');
