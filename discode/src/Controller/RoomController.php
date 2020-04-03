@@ -18,6 +18,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/room")
@@ -87,7 +88,8 @@ class RoomController extends AbstractController
         $target = [];
         $jsonEncode = array(
             'room'=> $room,
-            'message' => $_POST['sendMessage']
+            'message' => $_POST['sendMessage'],
+            'user' =>  $this->getUser()
         );
         $userLogged = $this->getUser();
         $criteria = array();
