@@ -62,7 +62,7 @@ class RoomController extends AbstractController
      */
     public function show(Room $room, MercureCookieGenerator $cookieGenerator, MessageRepository $messageRepository): Response
     {
-        if($this->getUser()->getUsername() == null){
+        if($this->getUser() == null){
             return $this->redirectToRoute('app_login');
         }else{
             $messages = $messageRepository->findBy(
