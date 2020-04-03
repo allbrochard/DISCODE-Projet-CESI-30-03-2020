@@ -9,7 +9,10 @@ use App\Service\MercureCookieGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mercure\PublisherInterface;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/room")
@@ -62,6 +65,25 @@ class RoomController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/send/{room}", name="send", methods={"POST"})
+     */
+    public function send(PublisherInterface  $publisher, $room, SerializerInterface $serializer)
+    {
+        //$request = $this->get('request');
+        $target = ["http://192.168.1.22/room/".$room];
+        $jsonEncode = array(
+            'room'=> $room,
+            'message' => 'salut'
+        );
+        $update = new Update(
+            "http://192.168.1.22/room/".$room,
+            $serializer->serialize($jsonEncode, 'json'),
+            $target
+        );
+        $publisher($update);
+        return $this->redirectToRoute('room_show', array('id'=> $room));
+    }
     /**
      * @Route("/{id}/edit", name="room_edit", methods={"GET","POST"})
      */
