@@ -27,7 +27,7 @@ class Room
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="room_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="id", orphanRemoval=true)
      */
     private $messages;
 
