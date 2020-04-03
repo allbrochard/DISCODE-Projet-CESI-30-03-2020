@@ -19,7 +19,7 @@
     </table>
     <div>
         <ul class="messages">
-            {% for message in messages %}
+            {% for message in messages|reverse %}
                 <li class="message">{{ message.message }}</li>
             {% endfor %}
         </ul>
