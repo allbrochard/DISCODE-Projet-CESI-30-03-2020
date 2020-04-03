@@ -102,7 +102,7 @@ class RoomController extends AbstractController
         $entityManager->persist($message);
         $entityManager->flush();
         $update = new Update(
-            "http://192.168.1.22/room/".$room,
+            "http://discode.fun/room/".$room,
             $serializer->serialize($jsonEncode, 'json'),
             $target
         );

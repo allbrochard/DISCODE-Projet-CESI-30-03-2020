@@ -25,7 +25,7 @@ class MercureCookieGenerator
     public function generate(Room $room){
 
         $token = (new Builder())
-            ->set('mercure', ['send'=>["http://192.168.1.22/room/".$room->getId()]])
+            ->set('mercure', ['send'=>["http://discode.fun/room/".$room->getId()]])
             ->sign(new Sha256(),$this->secret)
             ->getToken();
         return "mercureAuthorization={$token}; Path=/hub; HttpOnly;";
