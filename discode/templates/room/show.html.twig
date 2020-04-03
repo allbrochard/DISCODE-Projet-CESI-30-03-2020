@@ -40,7 +40,7 @@
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
             let message = data.message;
-            console.log(data);
+            console.log(e);
             if(data.message){
                 document.querySelector(".messages").insertAdjacentHTML('afterbegin', '<li class="message">'+message+'</li>')
             }
