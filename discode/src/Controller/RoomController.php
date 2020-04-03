@@ -72,7 +72,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/send/{room}", name="send", methods={"POST"})
      */
-    public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer)
+    public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer, RoomRepository $roomRepository)
     {
         //$request = $this->get('request');
 //        $target = ["http://192.168.1.22/room/".$room];
@@ -85,8 +85,8 @@ class RoomController extends AbstractController
         $message->setDateCreation(new \DateTime())
             ->setMessage($_POST['sendMessage'])
             ->setEpingler(false)
-            ->setRoomId($room)
-            ->setUser(1);
+            ->setRoomId($roomRepository->find($room))
+            ->setUser(null);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($message);
         $entityManager->flush();
