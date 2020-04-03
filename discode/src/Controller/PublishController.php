@@ -16,11 +16,11 @@ class PublishController extends AbstractController
      */
     public function send(PublisherInterface  $publisher, $room, SerializerInterface $serializer)
     {
-        $request = $this->get('request');
+        //$request = $this->get('request');
         $target = ["http://192.168.1.22/room/".$room];
         $jsonEncode = array(
             'room'=> $room,
-            'message' => $request->get('sendMessage')
+            //'message' => $request->get('sendMessage')
         );
         $update = new Update(
             "http://192.168.1.22/room/".$room,
