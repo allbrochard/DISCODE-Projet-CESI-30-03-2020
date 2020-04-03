@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
@@ -14,6 +15,7 @@ use Symfony\Component\Mercure\Update;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @Route("/room")
@@ -58,7 +60,7 @@ class RoomController extends AbstractController
      */
     public function show(Room $room, MercureCookieGenerator $cookieGenerator): Response
     {
-
+        $messages = $room->getMessages();
         $response = $this->render('room/show.html.twig', [
             'room' => $room,
         ]);
@@ -78,6 +80,15 @@ class RoomController extends AbstractController
             'room'=> $room,
             'message' => $_POST['sendMessage']
         );
+        $message = new Message();
+        $message->setDateCreation(new \DateTime())
+            ->setMessage($_POST['sendMessage'])
+            ->setEpingler(false)
+            ->setRoomId($room)
+            ->setUser(1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($message);
+        $entityManager->flush();
         $update = new Update(
             "http://192.168.1.22/room/".$room,
             $serializer->serialize($jsonEncode, 'json'),

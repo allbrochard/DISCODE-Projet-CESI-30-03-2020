@@ -19,6 +19,9 @@
     </table>
     <div>
         <ul class="messages">
+            {% for message in messages %}
+                <li class="message">{{ message.message }}</li>
+            {% endfor %}
         </ul>
         <form action="{{ path('send', {room : room.id}) }}" method="post">
             <input name="sendMessage" type="text" value="" placeholder="Envoyer un message">
