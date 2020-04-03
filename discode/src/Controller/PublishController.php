@@ -22,7 +22,6 @@ class PublishController extends AbstractController
             'room'=> $room,
             'message' => 'salut'
         );
-        dump("http://192.168.1.22/room/".$room); 
         $update = new Update(
             "http://192.168.1.22/room/".$room,
             $serializer->serialize($jsonEncode, 'json'),
