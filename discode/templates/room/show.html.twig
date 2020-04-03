@@ -42,10 +42,10 @@
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
-            let message = data.message;
+            let message = {{ app.user.username }}+'  - '+data.message;
             console.log(e);
             if(data.message){
-                document.querySelector(".messages").insertAdjacentHTML('beforeend', '<li class="message">'{{ app.user.username }}+'  - '+message+'</li>')
+                document.querySelector(".messages").insertAdjacentHTML('beforeend', '<li class="message">'+message+'</li>');
             }
         };
 
