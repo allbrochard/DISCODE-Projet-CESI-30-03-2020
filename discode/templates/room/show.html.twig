@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_lte.html.twig' %}
 
 {% block title %}Room{% endblock %}
 
@@ -37,8 +37,8 @@
 {% block javascripts %}
     <script>
 
-        const url = new URL('http://77.207.12.26:3000/hub');
-        url.searchParams.append('topic', 'http://discode.fun/room/'+{{ room.id }});
+        const url = new URL('http://192.168.1.22:3000/hub');
+        url.searchParams.append('topic', 'http://192.168.1.22/room/'+{{ room.id }});
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
