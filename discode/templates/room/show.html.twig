@@ -35,12 +35,13 @@
     <script>
 
         const url = new URL('http://192.168.1.22:3000/hub');
-        url.searchParams.append('topic', 'http://192.168.1.22/room/{id}');
+        url.searchParams.append('topic', 'http://192.168.1.22/room/'+{{ room.id }});
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
-            let message = data.room;
-            if(data.room){
+            let message = data.message;
+            console.log(data);
+            if(data.message){
                 document.querySelector(".messages").insertAdjacentHTML('afterbegin', '<li class="message">'+message+'</li>')
             }
         };

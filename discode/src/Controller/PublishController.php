@@ -20,7 +20,7 @@ class PublishController extends AbstractController
         $target = ["http://192.168.1.22/room/".$room];
         $jsonEncode = array(
             'room'=> $room,
-            //'message' => $request->get('sendMessage')
+            'message' => 'salut'
         );
         $update = new Update(
             "http://192.168.1.22/room/".$room,
