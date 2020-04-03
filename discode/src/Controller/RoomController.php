@@ -86,6 +86,7 @@ class RoomController extends AbstractController
             ->setEpingler(false)
             ->setRoomId($room)
             ->setUser(1);
+        dump($message);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($message);
         $entityManager->flush();
@@ -95,6 +96,7 @@ class RoomController extends AbstractController
             $target
         );
         $bus->dispatch($update);
+        die;
         return $this->redirectToRoute('room_show', array('id'=> $room));
     }
     /**
