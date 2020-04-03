@@ -72,7 +72,8 @@ class RoomController extends AbstractController
     public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer)
     {
         //$request = $this->get('request');
-        $target = ["http://192.168.1.22/room/".$room];
+//        $target = ["http://192.168.1.22/room/".$room];
+        $target = [];
         $jsonEncode = array(
             'room'=> $room,
             'message' => 'salut'
