@@ -64,7 +64,7 @@ class RoomController extends AbstractController
     {
         $messages = $messageRepository->findBy(
             array('room' => $room->getId()),
-            array('date_creation' => 'ASC'),
+            array('date_creation' => 'DESC'),
             20
         );
         $response = $this->render('room/show.html.twig', [
