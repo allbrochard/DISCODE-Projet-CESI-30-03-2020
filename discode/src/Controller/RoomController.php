@@ -6,6 +6,7 @@ use App\Entity\Message;
 use App\Entity\Room;
 use App\Form\RoomType;
 use App\Repository\RoomRepository;
+use App\Repository\UserRepository;
 use App\Service\MercureCookieGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,7 +73,7 @@ class RoomController extends AbstractController
     /**
      * @Route("/send/{room}", name="send", methods={"POST"})
      */
-    public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer, RoomRepository $roomRepository)
+    public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer, RoomRepository $roomRepository, UserRepository $userRepository)
     {
         //$request = $this->get('request');
 //        $target = ["http://192.168.1.22/room/".$room];
@@ -86,7 +87,7 @@ class RoomController extends AbstractController
             ->setMessage($_POST['sendMessage'])
             ->setEpingler(false)
             ->setRoomId($roomRepository->find($room))
-            ->setUser(null);
+            ->setUser($userRepository->find(1));
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($message);
         $entityManager->flush();
