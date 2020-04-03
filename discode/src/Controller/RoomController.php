@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Message;
 use App\Entity\Room;
 use App\Form\RoomType;
+use App\Repository\MessageRepository;
 use App\Repository\RoomRepository;
 use App\Repository\UserRepository;
 use App\Service\MercureCookieGenerator;
@@ -59,9 +60,13 @@ class RoomController extends AbstractController
     /**
      * @Route("/{id}", name="room_show", methods={"GET"})
      */
-    public function show(Room $room, MercureCookieGenerator $cookieGenerator): Response
+    public function show(Room $room, MercureCookieGenerator $cookieGenerator, MessageRepository $messageRepository): Response
     {
-        $messages = $room->getMessages();
+        $messages = $messageRepository->findBy(
+            array('room' => $room->getId()),
+            array('id' => 'DESC'),
+            20
+        );
         $response = $this->render('room/show.html.twig', [
             'room' => $room,
             'messages' => $messages
@@ -82,6 +87,8 @@ class RoomController extends AbstractController
             'room'=> $room,
             'message' => $_POST['sendMessage']
         );
+        $criteria = array();
+        $orderBy = array();
         $message = new Message();
         $message->setDateCreation(new \DateTime())
             ->setMessage($_POST['sendMessage'])
