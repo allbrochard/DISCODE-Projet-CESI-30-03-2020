@@ -20,7 +20,7 @@
     <div>
         <ul class="messages">
             {% for message in messages|reverse %}
-                <li class="message">{{ message.message }}</li>
+                <li class="message">{{ message.user.username }}  - {{ message.message }}</li>
             {% endfor %}
         </ul>
         <form action="{{ path('send', {room : room.id}) }}" method="post">
@@ -45,7 +45,7 @@
             let message = data.message;
             console.log(e);
             if(data.message){
-                document.querySelector(".messages").insertAdjacentHTML('beforeend', '<li class="message">'+message+'</li>')
+                document.querySelector(".messages").insertAdjacentHTML('beforeend', '<li class="message">'{{ app.user.username }}+'  - '+message+'</li>')
             }
         };
 

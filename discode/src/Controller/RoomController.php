@@ -80,13 +80,12 @@ class RoomController extends AbstractController
      */
     public function send(MessageBusInterface  $bus, $room, SerializerInterface $serializer, RoomRepository $roomRepository, UserRepository $userRepository)
     {
-        //$request = $this->get('request');
-//        $target = ["http://192.168.1.22/room/".$room];
         $target = [];
         $jsonEncode = array(
             'room'=> $room,
             'message' => $_POST['sendMessage']
         );
+        $userLogged = $this->getUser();
         $criteria = array();
         $orderBy = array();
         $message = new Message();
@@ -94,7 +93,7 @@ class RoomController extends AbstractController
             ->setMessage($_POST['sendMessage'])
             ->setEpingler(false)
             ->setRoomId($roomRepository->find($room))
-            ->setUser($userRepository->find(1));
+            ->setUser($userLogged);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($message);
         $entityManager->flush();
