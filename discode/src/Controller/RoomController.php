@@ -63,6 +63,7 @@ class RoomController extends AbstractController
         $messages = $room->getMessages();
         $response = $this->render('room/show.html.twig', [
             'room' => $room,
+            'messages' => $messages
         ]);
         $response->headers->set('set-cookie', $cookieGenerator->generate($room));
         return $response;
