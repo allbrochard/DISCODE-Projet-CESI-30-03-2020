@@ -14,12 +14,17 @@ class PublishController extends AbstractController
     /**
      * @Route("/send/{room}", name="send", methods={"POST"})
      */
-    public function send(PublisherInterface  $publisher, Room $room, SerializerInterface $serializer)
+    public function send(PublisherInterface  $publisher, $room, SerializerInterface $serializer)
     {
-        $target = ["http://192.168.1.22/room/{$room->getId()}"];
+        $request = $this->get('request');
+        $target = ["http://192.168.1.22/room/".$room];
+        $jsonEncode = array(
+            'room'=> $room,
+            'message' => $request->get('sendMessage')
+        );
         $update = new Update(
-            "http://192.168.1.22/message",
-            $serializer->serialize($room, 'json', ['groups' => 'public']),
+            "http://192.168.1.22/room/".$room,
+            $serializer->serialize($jsonEncode, 'json'),
             $target
         );
         $publisher($update);

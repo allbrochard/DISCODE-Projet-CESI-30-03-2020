@@ -20,7 +20,7 @@
     <div>
         <ul class="messages">
         </ul>
-        <form action="{{ path('send', {room : room}) }}" method="post">
+        <form action="{{ path('send', {room : room.id}) }}" method="post">
             <input name="sendMessage" type="text" value="" placeholder="Envoyer un message">
             <button type="submit" class="btn btn-primary">Send</button>
         </form>
@@ -36,13 +36,13 @@
 
         const url = new URL('http://192.168.1.22:3000/hub');
         //url.searchParams.append('topic', 'https://example.com/books/{id}');
-        url.searchParams.append('topic', 'http://192.168.1.22/room/{{room.id}}');
+        url.searchParams.append('topic', 'http://192.168.1.22/room/'+{{room.id}});
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
             let message = data.message;
             if(data.message){
-                document.querySelector(".messages").insertAdjacentHTML('afterbegin', '<li class="message">${message}</li>')
+                document.querySelector(".messages").insertAdjacentHTML('afterbegin', '<li class="message">'+message+'</li>')
             }
         };
 
