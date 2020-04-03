@@ -22,7 +22,7 @@
         </ul>
         <form action="{{ path('send', {room : room.id}) }}" method="post">
             <input name="sendMessage" type="text" value="" placeholder="Envoyer un message">
-            <button class="btn btn-primary">Send</button>
+            <button type="submit" class="btn btn-primary">Send</button>
         </form>
     </div>
     <a href="{{ path('room_index') }}">back to list</a>
@@ -34,7 +34,7 @@
 {% block javascripts %}
     <script>
 
-        const url = new URL('https://192.168.1.22:3000/hub');
+        const url = new URL('https://192.168.1.22/room/${room.id}');
         //url.searchParams.append('topic', 'https://example.com/books/{id}');
         url.searchParams.append('topic', 'https://192.168.1.22/room/${room.id}');
         const eventSource = new EventSource(url, {withCredentials:true});
