@@ -34,7 +34,7 @@
 {% block javascripts %}
     <script>
 
-        const url = new URL('http://192.168.1.22:3000/hub');
+        const url = new URL('http://192.168.1.22:3000');
         //url.searchParams.append('topic', 'https://example.com/books/{id}');
         url.searchParams.append('topic', 'https://192.168.1.22/room/{{room.id}}');
         const eventSource = new EventSource(url, {withCredentials:true});
