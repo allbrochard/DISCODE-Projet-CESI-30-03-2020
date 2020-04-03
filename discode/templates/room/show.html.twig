@@ -64,8 +64,8 @@
 {% block javascripts %}
     <script>
 
-        const url = new URL('http://192.168.1.22:3000/hub');
-        url.searchParams.append('topic', 'http://192.168.1.22/room/'+{{ room.id }});
+        const url = new URL('http://127.0.0.1:3000/hub');
+        url.searchParams.append('topic', 'http://127.0.0.1:8000/room/'+{{ room.id }});
         const eventSource = new EventSource(url, {withCredentials:true});
         eventSource.onmessage = e => {
             const data = JSON.parse(e.data);
