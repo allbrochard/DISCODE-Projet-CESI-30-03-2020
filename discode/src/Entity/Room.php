@@ -119,4 +119,9 @@ class Room
         return $this;
     }
 
+    public function __toString()
+    {
+        return 'room : '.$this->getNom();
+    }
+
 }

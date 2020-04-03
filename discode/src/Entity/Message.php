@@ -115,5 +115,9 @@ class Message
 
         return $this;
     }
+    public function __toString()
+    {
+        return 'message : '.$this->getDateCreation()->format('d/m/YY');
+    }
 
 }
