@@ -16,7 +16,7 @@ class Message
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $message_id;
+    private $id;
 
     /**
      * @ORM\Column(type="date")
@@ -53,7 +53,7 @@ class Message
 
     public function getId(): ?int
     {
-        return $this->message_id;
+        return $this->id;
     }
 
     public function getDateCreation(): ?\DateTimeInterface

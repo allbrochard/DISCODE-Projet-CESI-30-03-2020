@@ -18,7 +18,7 @@ class Room
      * @ORM\Column(type="integer")
      * @Groups("public")
      */
-    private $room_id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,7 +45,7 @@ class Room
 
     public function getId(): ?int
     {
-        return $this->room_id;
+        return $this->id;
     }
 
     public function getNom(): ?string
